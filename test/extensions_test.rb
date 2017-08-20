@@ -554,6 +554,14 @@ context 'Extensions' do
       assert_equal 0, Asciidoctor::Extensions.groups.size
     end
 
+    test 'can provide extension registry as option (two step instanciation)' do
+      registry = Asciidoctor::Extensions.create
+      registry.tree_processor SampleTreeProcessor
+
+      doc = document_from_string %(= Document Title\n\ncontent), :extension_registry => registry
+      refute_nil doc.extensions # doesn't work!
+    end
+
     test 'can provide extensions proc as option' do
       doc = document_from_string %(= Document Title\n\ncontent), :extensions => proc {
         tree_processor SampleTreeProcessor
