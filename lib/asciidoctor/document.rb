@@ -513,6 +513,11 @@ class Document < AbstractBlock
     end
   end
 
+  def parse_list data = nil
+    doc = self
+    ListParser.parse @reader, doc, :header_only => @options[:parse_header_only]
+  end
+
   # Public: Get the named counter and take the next number in the sequence.
   #
   # name  - the String name of the counter
