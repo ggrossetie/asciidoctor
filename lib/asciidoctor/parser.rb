@@ -771,7 +771,7 @@ class Parser
           lines.pop while lines[-1].empty?
           lines << lines.pop.chop # strip trailing quote
           attributes['style'] = 'quote'
-          block = Block.new(parent, :quote, content_model: :simple, source: lines, attributes: attributes)
+          block = build_block(:quote, :compound, false, parent, Reader.new(lines), attributes)
           attribution, citetitle = (block.apply_subs credit_line).split ', ', 2
           attributes['attribution'] = attribution if attribution
           attributes['citetitle'] = citetitle if citetitle

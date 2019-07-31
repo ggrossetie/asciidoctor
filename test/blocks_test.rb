@@ -563,7 +563,7 @@ context 'Blocks' do
       output = convert_string input
       assert_css '.quoteblock', output, 1
       assert_css '.quoteblock > blockquote', output, 1
-      assert_xpath %(//*[@class="quoteblock"]/blockquote[normalize-space(text())="A famous quote. Some more inspiring words."]), output, 1
+      assert_xpath %(//*[@class="quoteblock"]/blockquote/div[@class="paragraph"]/p[normalize-space(text())="A famous quote. Some more inspiring words."]), output, 1
       assert_css '.quoteblock > .attribution', output, 1
       assert_css '.quoteblock > .attribution > cite', output, 1
       assert_css '.quoteblock > .attribution > br + cite', output, 1
