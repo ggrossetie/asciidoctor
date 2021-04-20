@@ -20,6 +20,15 @@ class Converter::SemanticHtml5Converter < Converter::Base
     result.join LF
   end
 
+  def convert_section node
+    attributes = common_html_attributes node.id, node.role
+    level = node.level
+    %(<section#{attributes}>
+<h#{level + 1}>#{node.title}</h#{level + 1}>
+#{node.content}
+</section>)
+  end
+
   def convert_paragraph node
     attributes = common_html_attributes node.id, node.role
     if node.title?
