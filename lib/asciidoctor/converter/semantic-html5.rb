@@ -21,10 +21,27 @@ class Converter::SemanticHtml5Converter < Converter::Base
   end
 
   def convert_section node
-    attributes = common_html_attributes node.id, node.role
+    doc_attrs = node.document.attributes
+    if node.caption
+      title = node.captioned_title
+    else
+      title = node.title
+    end
+    id = node.id
+    if doc_attrs['sectlinks']
+      title = %(<a class="link" href="##{id}">#{title}</a>)
+    end
+    if doc_attrs['sectanchors']
+      if doc_attrs['sectanchors'] == 'after'
+        title = %(#{title}<a class="anchor" href="##{id}"></a>)
+      else
+        title = %(<a class="anchor" href="##{id}"></a>#{title})
+      end
+    end
+    attributes = common_html_attributes id, node.role
     level = node.level
     %(<section#{attributes}>
-<h#{level + 1}>#{node.title}</h#{level + 1}>
+<h#{level + 1}>#{title}</h#{level + 1}>
 #{node.content}
 </section>)
   end
