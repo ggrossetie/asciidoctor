@@ -111,7 +111,11 @@ class Converter::SemanticHtml5Converter < Converter::Base
     end
     ret = []
     ret << %(<callout role="note" #{attributes}>)
-    ret << %(<cot>#{label}</cot>)
+    if node.title?
+      ret << %(<cot><strong>#{label}:</strong> #{node.title}</cot>)
+    else
+      ret << %(<cot>#{label}</cot>)
+    end
     # TODO use whatever we decide on other blocks to display node.title
     ret << node.content
     ret << '</callout>'
