@@ -110,11 +110,11 @@ class Converter::SemanticHtml5Converter < Converter::Base
       label = text_label
     end
     ret = []
-    ret << %(<admonition#{attributes}>)
-    ret << %(<strong class="label">#{label}</strong>)
+    ret << %(<callout role="note" #{attributes}>)
+    ret << %(<cot>#{label}</cot>)
     # TODO use whatever we decide on other blocks to display node.title
     ret << node.content
-    ret << '</admonition>'
+    ret << '</callout>'
     ret.join LF
   end
 
