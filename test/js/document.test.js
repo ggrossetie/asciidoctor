@@ -128,7 +128,6 @@ describe('Structure', () => {
     const input = 'Document Title\n==============\n\n+content+'
     const doc = await parse(input)
     assert.ok(inAttr(doc, 'compat-mode'))
-    // NOTE: convert() not yet implemented (html5 converter stub)
   })
 
   test('compat mode disabled in header overrides legacy doctitle', async () => {
@@ -222,11 +221,9 @@ describe('Structure', () => {
   test('embedded document when standalone is false', async () => {
     const doc = await parse('= Document Title\n\ncontent', { standalone: false })
     assert.ok(inAttr(doc, 'embedded'))
-    // NOTE: convert() not yet implemented (html5 converter stub)
   })
 
-  // NOTE: convert() not yet implemented (html5 converter stub)
-  test.skip('standalone document includes html and header/footer', async () => {
+  test('standalone document includes html and header/footer', async () => {
     const doc = await parse('= Title\n\nparagraph', { safe: 'unsafe', standalone: true })
     const result = doc.convert()
     assert.ok(result.includes('<html'))
@@ -321,8 +318,7 @@ describe('Backends and Doctypes', () => {
     assert.equal(doc.attr('htmlsyntax'), 'xml')
   })
 
-  // NOTE: convert() not yet implemented (html5 converter stub)
-  test.skip('book doctype produces book body class', async () => {
+  test('book doctype produces book body class', async () => {
     const result = (await parse('= Title\n\nparagraph', { attributes: { backend: 'html5', doctype: 'book' }, standalone: true })).convert()
     assert.ok(result.includes('class="book"'))
   })
